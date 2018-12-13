@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UserGroup} from 'core/models/user-group';
-import {API_BASE_URL} from 'core/constants';
+import {UserGroup} from '../../models/user-group';
+import {API_BASE_URL} from '../../constants';
 
 @Injectable({
   providedIn: 'root'

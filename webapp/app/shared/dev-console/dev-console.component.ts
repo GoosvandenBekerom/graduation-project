@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import { DevService } from 'core/services/util/dev.service';
+import { DevService } from '../../core/services/util/dev.service';
 
 @Component({
   selector: 'app-dev-console',

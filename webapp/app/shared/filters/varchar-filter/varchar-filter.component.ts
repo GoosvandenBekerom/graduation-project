@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ClrDatagridFilterInterface} from '@clr/angular';
 import {Subject} from 'rxjs';
 import {CustomFilterProperties} from '../custom-filter-properties';
-import { ComparisonType, FilterStructure } from 'core/util/FilterStructure';
+import { ComparisonType, FilterStructure } from '../../../core/util/FilterStructure';
 
 @Component({
   selector: 'app-varchar-filter',

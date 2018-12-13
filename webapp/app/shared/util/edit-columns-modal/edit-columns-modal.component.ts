@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {flatMap, map, toArray} from 'rxjs/operators';
-import { Overview } from 'core/models/overview';
-import { SecurityGroup } from 'core/models/security-group';
-import { OverviewService } from 'core/services/resources/overview.service';
-import { UserGroupService } from 'core/services/resources/user-group.service';
-import { OverviewColumn } from 'core/models/overview-column';
+import { Overview } from '../../../core/models/overview';
+import { SecurityGroup } from '../../../core/models/security-group';
+import { OverviewService } from '../../../core/services/resources/overview.service';
+import { UserGroupService } from '../../../core/services/resources/user-group.service';
+import { OverviewColumn } from '../../../core/models/overview-column';
 import { ColumnPermissionsFormGroup } from '../column-permissions-dropdown/column-permissions-dropdown.component';
 
 @Component({

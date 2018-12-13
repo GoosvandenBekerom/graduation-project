@@ -8,7 +8,7 @@ import { OverviewService } from './services/resources/overview.service';
 import { UserGroupService } from './services/resources/user-group.service';
 import { DevService } from './services/util/dev.service';
 import { TimingService } from './services/util/timing.service';
-import { AuthService } from 'core/services/auth.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   imports: [

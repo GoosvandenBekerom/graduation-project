@@ -1,9 +1,9 @@
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Serializer} from './serializers/serializer';
-import {API_BASE_URL} from 'core/constants';
-import {Resource} from 'core/models/resource';
-import {UserGroup} from 'core/models/user-group';
+import {API_BASE_URL} from '../../constants';
+import {Resource} from '../../models/resource';
+import {UserGroup} from '../../models/user-group';
 
 export class ResourceService<T extends Resource> {
     constructor(

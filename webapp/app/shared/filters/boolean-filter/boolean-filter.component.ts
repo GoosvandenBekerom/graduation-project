@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ClrDatagridFilterInterface} from '@clr/angular';
 import {CustomFilterProperties} from '../custom-filter-properties';
 import {Subject} from 'rxjs';
-import { FilterStructure } from 'core/util/FilterStructure';
+import { FilterStructure } from '../../../core/util/FilterStructure';
 
 @Component({
   selector: 'app-boolean-filter',

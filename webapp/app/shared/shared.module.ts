@@ -1,11 +1,10 @@
 import { ClrFormsNextModule, ClrFormsModule, ClarityModule } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
-import { PlusButtonComponent } from 'shared/util/plus-button/plus-button.component';
+import { PlusButtonComponent } from './util/plus-button/plus-button.component';
 import { ManagePermissionsModalComponent } from './util/manage-permissions-modal/manage-permissions-modal.component';
 import { ColumnPermissionsDropdownComponent } from './util/column-permissions-dropdown/column-permissions-dropdown.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from 'core/core.module';
 import { DevConsoleComponent } from './dev-console/dev-console.component';
 import { BooleanFilterComponent } from './filters/boolean-filter/boolean-filter.component';
 import { DropdownFilterComponent } from './filters/dropdown-filter/dropdown-filter.component';

@@ -1,7 +1,7 @@
 <div *ngFor="let filter of value.filters" style="margin-bottom: 20px;">
 
   <div class="clr-select-wrapper" style="margin-right: 5px">
-    <select class="clr-select" [(ngModel)]="filter.type" (change)="updateFilter(); input ? input.focus() : ''">
+    <select class="clr-select" [(ngModel)]="filter.type" (change)="updateFilter()">
       <option *ngFor="let t of types" [value]="t">{{t}}</option>
     </select>
   </div>

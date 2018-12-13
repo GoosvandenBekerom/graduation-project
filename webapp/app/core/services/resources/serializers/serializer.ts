@@ -1,4 +1,4 @@
-import {Resource} from 'core/models/resource';
+import {Resource} from '../../../models/resource';
 
 export interface Serializer<T extends Resource> {
     toJson(resource: T): any;

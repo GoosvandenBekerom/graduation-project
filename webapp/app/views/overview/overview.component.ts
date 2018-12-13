@@ -3,22 +3,22 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {ClrDatagridFilterInterface, ClrDatagridSortOrder, ClrDatagridStateInterface} from '@clr/angular';
 import {SnotifyService} from 'ng-snotify';
-import { Overview } from 'core/models/overview';
-import { OverviewPage } from 'core/models/overview-page';
-import { JdbcType } from 'core/models/overview-column';
-import { OverviewService } from 'core/services/resources/overview.service';
-import { DevGuard } from 'core/guards/dev.guard';
-import { DevService } from 'core/services/util/dev.service';
-import { TimingService } from 'core/services/util/timing.service';
-import { PATH_ROUTE_OVERVIEW } from 'core/constants';
-import { SortInterface } from 'core/util/SortInterface';
-import { VarcharFilterComponent } from 'shared/filters/varchar-filter/varchar-filter.component';
-import { NumericFilterComponent } from 'shared/filters/numeric-filter/numeric-filter.component';
-import { BooleanFilterComponent } from 'shared/filters/boolean-filter/boolean-filter.component';
-import { DropdownFilterComponent } from 'shared/filters/dropdown-filter/dropdown-filter.component';
-import { FilterStructure, ComparisonType } from 'core/util/FilterStructure';
-import { handleRestError } from 'globals';
-import { UserGroup } from 'core/models/user-group';
+import { Overview } from '../../core/models/overview';
+import { OverviewPage } from '../../core/models/overview-page';
+import { JdbcType } from '../../core/models/overview-column';
+import { OverviewService } from '../../core/services/resources/overview.service';
+import { DevGuard } from '../../core/guards/dev.guard';
+import { DevService } from '../../core/services/util/dev.service';
+import { TimingService } from '../../core/services/util/timing.service';
+import { PATH_ROUTE_OVERVIEW } from '../../core/constants';
+import { SortInterface } from '../../core/util/SortInterface';
+import { VarcharFilterComponent } from '../../shared/filters/varchar-filter/varchar-filter.component';
+import { NumericFilterComponent } from '../../shared/filters/numeric-filter/numeric-filter.component';
+import { BooleanFilterComponent } from '../../shared/filters/boolean-filter/boolean-filter.component';
+import { DropdownFilterComponent } from '../../shared/filters/dropdown-filter/dropdown-filter.component';
+import { FilterStructure, ComparisonType } from '../../core/util/FilterStructure';
+import { handleRestError } from '../../globals';
+import { UserGroup } from '../../core/models/user-group';
 
 @Component({
   selector: 'app-overview',

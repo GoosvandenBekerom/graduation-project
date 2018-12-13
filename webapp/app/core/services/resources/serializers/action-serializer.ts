@@ -1,6 +1,6 @@
 import { Serializer } from './serializer';
-import { Action } from 'core/models/action';
-import { ActionType } from 'core/models/actionType';
+import { Action } from '../../../models/action';
+import { ActionType } from '../../../models/actionType';
 
 export class ActionSerializer implements Serializer<Action> {
     toJson({type, url, overviewId, path}: Action) {

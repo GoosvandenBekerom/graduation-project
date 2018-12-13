@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map, shareReplay, tap} from 'rxjs/operators';
-import {AUTHORIZATION_TOKEN_PREFIX, BASE_URL, HEADER_AUTHORIZATION, KEY_AUTH_TOKEN, KEY_AUTH_USER} from 'core/constants';
+import {AUTHORIZATION_TOKEN_PREFIX, BASE_URL, HEADER_AUTHORIZATION, KEY_AUTH_TOKEN, KEY_AUTH_USER} from '../constants';
 import {BehaviorSubject} from 'rxjs';
-import * as jwt_decode from 'jwt-decode';
+import * as jwt_decode_ from 'jwt-decode';
+
+const jwt_decode = jwt_decode_;
 
 @Injectable({
   providedIn: 'root'

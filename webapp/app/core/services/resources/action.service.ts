@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ResourceService} from './resource-service';
-import {Action} from 'core/models/action';
 import {HttpClient} from '@angular/common/http';
+import {Action} from '../../models/action';
 import {ActionSerializer} from './serializers/action-serializer';
 
 @Injectable({

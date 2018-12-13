@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { OverviewColumn } from 'core/models/overview-column';
-import { SecurityGroup } from 'core/models/security-group';
+import { OverviewColumn } from '../../../core/models/overview-column';
+import { SecurityGroup } from '../../../core/models/security-group';
 
 @Component({
   selector: 'app-column-permissions-dropdown',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Observable} from 'rxjs';
-import { PATH_ROUTE_EDITOR } from 'core/constants';
-import { AuthService } from 'core/services/auth.service';
-import { DevGuard } from 'core/guards/dev.guard';
+import { PATH_ROUTE_EDITOR } from './core/constants';
+import { AuthService } from './core/services/auth.service';
+import { DevGuard } from './core/guards/dev.guard';
 
 @Component({
   selector: 'app-root',

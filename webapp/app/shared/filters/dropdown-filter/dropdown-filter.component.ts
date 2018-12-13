@@ -2,9 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ClrDatagridFilterInterface} from '@clr/angular';
 import {CustomFilterProperties} from '../custom-filter-properties';
 import {Subject} from 'rxjs';
-import { OverviewService } from 'core/services/resources/overview.service';
-import { OverviewColumn } from 'core/models/overview-column';
-import { FilterStructure, ComparisonType } from 'core/util/FilterStructure';
+import { OverviewService } from '../../../core/services/resources/overview.service';
+import { OverviewColumn } from '../../../core/models/overview-column';
+import { FilterStructure, ComparisonType } from '../../../core/util/FilterStructure';
 
 @Component({
   selector: 'app-dropdown-filter',

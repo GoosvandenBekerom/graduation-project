@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import { MenuItem } from 'core/models/menu-item';
-import { PATH_ROUTE_OVERVIEW, DEFAULT_ICON } from 'core/constants';
-import { MenuItemService } from 'core/services/resources/menu-item.service';
-import { AuthService } from 'core/services/auth.service';
-import { DevGuard } from 'core/guards/dev.guard';
+import { MenuItem } from '../core/models/menu-item';
+import { PATH_ROUTE_OVERVIEW, DEFAULT_ICON } from '../core/constants';
+import { MenuItemService } from '../core/services/resources/menu-item.service';
+import { AuthService } from '../core/services/auth.service';
+import { DevGuard } from '../core/guards/dev.guard';
 
 @Component({
   selector: 'app-content',

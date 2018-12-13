@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import { Resource } from 'core/models/resource';
-import { UserGroup } from 'core/models/user-group';
-import { UserGroupService } from 'core/services/resources/user-group.service';
-import { SecurityGroup } from 'core/models/security-group';
+import { Resource } from '../../../core/models/resource';
+import { UserGroup } from '../../../core/models/user-group';
+import { UserGroupService } from '../../../core/services/resources/user-group.service';
+import { SecurityGroup } from '../../../core/models/security-group';
 
 @Component({
   selector: 'app-manage-permissions-modal',

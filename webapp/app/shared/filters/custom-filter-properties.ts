@@ -1,4 +1,4 @@
-import { FilterStructure } from 'core/util/FilterStructure';
+import { FilterStructure } from '../../core/util/FilterStructure';
 
 
 export interface CustomFilterProperties {

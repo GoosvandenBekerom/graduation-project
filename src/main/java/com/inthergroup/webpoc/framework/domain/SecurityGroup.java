@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author gvandenbekerom
  * @since 26-Nov-18
  *
- * Used to restrict BaseEntities for usergroups in ither_lc@dbint
+ * Used to restrict BaseEntities for usergroups in ither_lc{@literal @}dbint
  */
 @Entity
 @NoArgsConstructor

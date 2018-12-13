@@ -49,7 +49,7 @@ public class OverviewService extends EntityService<Overview, Long, OverviewRepos
      * Use this when the query of a overview changed
      *
      * Replaces all linked {@link com.inthergroup.webpoc.framework.domain.OverviewColumn}'s
-     * with new ones based on the given overview's query (metadata)
+     * with new ones based on the given overview's query {@literal (}metadata{@literal )}
      *
      * @param overview to save
      * @return saved overview
@@ -107,7 +107,7 @@ public class OverviewService extends EntityService<Overview, Long, OverviewRepos
      * @param o overview to get data page for
      * @param page number representing the page to get
      * @param filters a map which should have query columns as keys and the values to filter for as values
-     *                {column_one=column_one_filter_values, column_two=column_two_filter_values}
+     *                &#123;column_one=column_one_filter_values, column_two=column_two_filter_values&#125;
      * @return OverviewPage with the requested data
      */
     public OverviewPage getOverviewData(Overview o, int page, Map<String, FilterStructure> filters) {
@@ -119,7 +119,7 @@ public class OverviewService extends EntityService<Overview, Long, OverviewRepos
      *
      * @param overview to update columns of
      * @param columns updated columns for given overview
-     * @return saved (jpa tracked) instance of given overview
+     * @return saved {@literal (}jpa tracked{@literal )} instance of given overview
      */
     public Overview updateColumns(Overview overview, List<OverviewColumn> columns) {
         for (OverviewColumn c : columns) {
@@ -163,7 +163,7 @@ public class OverviewService extends EntityService<Overview, Long, OverviewRepos
      * Get a comma separated string of the given input string
      *
      * @param baseValue value to groupChange into comma separated string
-     * @return values of the first column in query result if the baseValue is an sql query
+     * @return values of the first column in query result if the baseValue is an sql query prefixed with SQL&gt;
      * otherwise just returns a trimmed version of the baseValue
      */
     public String getCommaSeparatedDropdownValues(String baseValue) {

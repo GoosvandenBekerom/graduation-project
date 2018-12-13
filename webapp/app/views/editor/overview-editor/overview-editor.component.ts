@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SnotifyService} from 'ng-snotify';
-import { Overview } from 'core/models/overview';
-import { OverviewService } from 'core/services/resources/overview.service';
-import { handleRestError } from 'globals';
-import { UserGroup } from 'core/models/user-group';
+import { Overview } from '../../../core/models/overview';
+import { OverviewService } from '../../../core/services/resources/overview.service';
+import { handleRestError } from '../../../globals';
+import { UserGroup } from '../../../core/models/user-group';
 
 @Component({
   selector: 'app-overview-editor',

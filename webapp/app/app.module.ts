@@ -1,20 +1,19 @@
-import { HomeComponent } from 'views/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { CoreModule } from 'core/core.module';
-import { SharedModule } from 'shared/shared.module';
-
-import { AppComponent } from 'app.component';
-import { AppRoutingModule } from 'app-routing.module';
 import { ClarityModule, ClrFormsNextModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
-import { AuthInterceptor } from 'core/interceptors/auth-interceptor';
-import { ContentComponent } from 'content/content.component';
-import { NotFoundComponent } from 'views/not-found/not-found.component';
+
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './views/home/home.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
+import { ContentComponent } from './content/content.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 @NgModule({
   declarations: [

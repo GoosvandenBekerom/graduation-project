@@ -1,4 +1,4 @@
-import {OverviewColumn} from 'core/models/overview-column';
+import {OverviewColumn} from '../models/overview-column';
 
 export interface SortInterface {
   column: OverviewColumn;

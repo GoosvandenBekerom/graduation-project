@@ -1,5 +1,5 @@
 import {Serializer} from './serializer';
-import { Overview } from 'core/models/overview';
+import { Overview } from '../../../models/overview';
 
 export class OverviewSerializer implements Serializer<Overview> {
     toJson = ({name, query, pageSize, refreshEnabled, refreshRate, countColumn}: Overview) =>

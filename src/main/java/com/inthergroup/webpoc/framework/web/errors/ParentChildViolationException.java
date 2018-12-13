@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author gvandenbekerom
  * @since 18-Sep-18
  *
- * Throw this exception when some kind of update to a {@link com.inthergroup.webpoc.framework.domain.MenuItem} violates parent/child rights
+ * Throw this exception when some kind of update to a {@link com.inthergroup.webpoc.framework.domain.MenuItem} violates parent&#47;child rights
  */
 @ResponseStatus(HttpStatus.CONFLICT)
 public class ParentChildViolationException extends RuntimeException {

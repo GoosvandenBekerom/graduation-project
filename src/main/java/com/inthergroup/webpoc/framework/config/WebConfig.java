@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author gvandenbekerom
  * @since 27-Sep-18
  *
- * Forwards non-controller requests to root (angular router)
+ * Forwards non-controller requests to angular router
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

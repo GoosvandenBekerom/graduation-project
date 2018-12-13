@@ -101,17 +101,7 @@
     </dependencies>
 
     <build>
-        <!--<defaultGoal>spring-boot:run</defaultGoal>-->
         <plugins>
-
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<addResources>true</addResources>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
             <plugin>
                 <!-- Extra configuration options can be found here: https://github.com/eirslett/frontend-maven-plugin -->
                 <groupId>com.github.eirslett</groupId>
@@ -141,7 +131,16 @@
                             <goal>yarn</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run packagr</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>yarn package</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>pack</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -177,21 +176,21 @@
             <!--</plugin>-->
 
             <!-- TODO: fix javadoc first (escapes e.t.c.) -->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<failOnError>false</failOnError>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>attach-javadocs</id>-->
-                        <!--<goals>-->
-                            <!--<goal>jar</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

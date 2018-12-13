@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SnotifyService} from 'ng-snotify';
-import { Action } from 'core/models/Action';
-import { ActionType } from 'core/models/actionType';
-import { Overview } from 'core/models/overview';
-import { ActionService } from 'core/services/resources/action.service';
-import { OverviewService } from 'core/services/resources/overview.service';
-import { UserGroup } from 'core/models/user-group';
-import { handleRestError } from 'globals';
+import { Action } from '../../../core/models/action';
+import { ActionType } from '../../../core/models/actionType';
+import { Overview } from '../../../core/models/overview';
+import { ActionService } from '../../../core/services/resources/action.service';
+import { OverviewService } from '../../../core/services/resources/overview.service';
+import { UserGroup } from '../../../core/models/user-group';
+import { handleRestError } from '../../../globals';
 
 @Component({
   selector: 'app-action-editor',

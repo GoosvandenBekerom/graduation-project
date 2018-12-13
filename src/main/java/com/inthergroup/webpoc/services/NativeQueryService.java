@@ -359,7 +359,7 @@ public class NativeQueryService {
      * @param offset which index should the first record be?
      * @param pageSize how many records should the query return?
      * @return Given sql with pagination support attached
-     * @deprecated since query manipulation uses subquery (left here for reference)
+     * @deprecated since query manipulation uses subquery. left here for reference
      */
     @Deprecated
     private String getPaginationQuery(String sql, int offset, int pageSize) {
@@ -373,7 +373,7 @@ public class NativeQueryService {
      * Adds a column that represents the total amount of records
      * @param sql to add OFFSET and LIMIT clauses to for pagination support
      * @return Given sql with pagination support attached
-     * @deprecated since query manipulation uses subquery (left here for reference)
+     * @deprecated since query manipulation uses subquery. left here for reference
      */
     @Deprecated
     private String getTotalCountQuery(String sql) {

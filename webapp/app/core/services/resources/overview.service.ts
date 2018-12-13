@@ -3,11 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ResourceService} from './resource-service';
 import {OverviewSerializer} from './serializers/overview-serializer';
-import { API_BASE_URL } from 'core/constants';
-import { Overview } from 'core/models/overview';
-import { SortInterface } from 'core/util/SortInterface';
-import { IOverviewPage } from 'core/models/overview-page';
-import { SecurityGroup } from 'core/models/security-group';
+import { API_BASE_URL } from '../../constants';
+import { Overview } from '../../models/overview';
+import { SortInterface } from '../../util/SortInterface';
+import { IOverviewPage } from '../../models/overview-page';
+import { SecurityGroup } from '../../models/security-group';
 
 @Injectable({
   providedIn: 'root'

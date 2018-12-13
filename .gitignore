@@ -2,3 +2,5 @@
 .svn/
 node_modules/
 target/
+*.tgz
+dist/

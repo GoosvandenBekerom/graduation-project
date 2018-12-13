@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {SnotifyService} from 'ng-snotify';
 import {flatMap, map, toArray} from 'rxjs/operators';
 import {combineLatest, of} from 'rxjs';
-import * as iconList from 'assets/icons.json';
-import { MenuItemService } from 'core/services/resources/menu-item.service.js';
-import { ActionService } from 'core/services/resources/action.service';
-import { MenuItem } from 'core/models/menu-item';
-import { Action } from 'core/models/Action';
-import { handleRestError } from 'globals';
-import { UserGroup } from 'core/models/user-group';
-import { DEFAULT_ICON } from 'core/constants';
+import * as iconList from '../../../assets/icons.json';
+import { MenuItemService } from '../../../core/services/resources/menu-item.service';
+import { ActionService } from '../../../core/services/resources/action.service';
+import { MenuItem } from '../../../core/models/menu-item';
+import { Action } from '../../../core/models/action';
+import { handleRestError } from '../../../globals';
+import { UserGroup } from '../../../core/models/user-group';
+import { DEFAULT_ICON } from '../../../core/constants';
 
 @Component({
   selector: 'app-menu-editor',

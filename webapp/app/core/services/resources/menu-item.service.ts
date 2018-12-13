@@ -3,8 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ResourceService} from './resource-service';
 import {MenuItemSerializer} from './serializers/menu-item-serializer';
-import {API_BASE_URL} from 'core/constants';
-import {MenuItem} from 'core/models/menu-item';
+import {API_BASE_URL} from '../../constants';
+import {MenuItem} from '../../models/menu-item';
 
 @Injectable({
   providedIn: 'root'

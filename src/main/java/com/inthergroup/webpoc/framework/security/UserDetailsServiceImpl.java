@@ -28,7 +28,7 @@ import java.util.List;
  * This class makes most of the spring security magic possible
  * The loadUserByUsername function is used to map a Inther LC user to a spring security user
  *
- * This also makes @PreAuthorize hasRole() checks possible for endpoints and rest controllers with Inther LC user_group's
+ * This also makes @PreAuthorize hasRole checks possible for endpoints and rest controllers with Inther LC user_group's
  */
 @Primary
 @Service

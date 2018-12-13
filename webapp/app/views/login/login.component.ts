@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 import {SnotifyService} from 'ng-snotify';
-import {handleRestError} from 'globals';
-import { AuthService } from 'core/services/auth.service';
+import {handleRestError} from '../../globals';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',

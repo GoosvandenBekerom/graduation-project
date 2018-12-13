@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author gvandenbekerom
  * @since 17-Sep-18
  *
- * Throw this (404) Exception whenever a requested Framework Entity is not found
+ * Throw this 404 Exception whenever a requested Framework Entity is not found
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class FrameworkEntityNotFoundException extends RuntimeException {

@@ -19,7 +19,7 @@ public interface ResultExtractor {
      * @param query
      * @param filterValues
      * @param filterJdbcTypes
-     * @return
+     * @return A collection of the results
      */
     List<Map<String, Object>> extractResult(String query, Object[] filterValues, int[] filterJdbcTypes, int amount, JdbcTemplate db);
 }
