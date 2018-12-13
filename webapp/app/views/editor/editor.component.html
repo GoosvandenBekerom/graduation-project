@@ -1,0 +1,35 @@
+<h1>Interface Editor</h1>
+
+<clr-tabs>
+
+  <!-- Menu Editor Tab -->
+  <clr-tab>
+    <button clrTabLink>Menu</button>
+    <ng-template [(clrIfActive)]="menuTabActive">
+      <clr-tab-content>
+        <app-menu-editor></app-menu-editor>
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+  <!-- Menu Editor Tab -->
+  <clr-tab>
+    <button clrTabLink>Actions</button>
+    <ng-template [(clrIfActive)]="actionTabActive">
+      <clr-tab-content>
+        <app-action-editor></app-action-editor>
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+  <!-- Overview Editor Tab -->
+  <clr-tab>
+    <button clrTabLink>Overview</button>
+    <ng-template [(clrIfActive)]="overviewTabActive">
+      <clr-tab-content>
+        <app-overview-editor></app-overview-editor>
+      </clr-tab-content>
+    </ng-template>
+  </clr-tab>
+
+</clr-tabs>

@@ -1,0 +1,21 @@
+<div class="clr-row clr-justify-content-center clr-align-items-center" style="height: 100%">
+
+    <div class="col-xl-4 col-lg-5 col-md-7 col-sm-10 col-xs-12">
+        <div class="login-box">
+            <img src="app/assets/inther-logo.png" alt="Inther Logo">
+
+            <form class="login">
+
+                <input class="username" type="text" name="username" [(ngModel)]="username" placeholder="Username" autocomplete="off">
+
+                <input class="password" type="password" name="password" [(ngModel)]="password" placeholder="Password">
+
+                <button type="submit" class="btn btn-primary login-button" (click)="onLoginSubmit()">
+                    <clr-icon shape="login"></clr-icon> Login
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+<div *ngFor="let filter of value.filters" style="margin-bottom: 20px;">
+
+  <div class="clr-select-wrapper" style="margin-right: 5px">
+    <select class="clr-select" [(ngModel)]="filter.type" (change)="updateFilter(); input ? input.focus() : ''">
+      <option *ngFor="let t of types" [value]="t">{{t}}</option>
+    </select>
+  </div>
+  <input #input
+         *ngIf="filter.type !== 'IS NULL' && filter.type !== 'IS NOT NULL'"
+         type="text" [(ngModel)]="filter.value" name="value" (change)="updateFilter()">
+
+  <app-remove-button *ngIf="value.filters.length > 1" style="vertical-align: bottom; margin-left: 5px;"
+                     (click)="onRemoveButtonClick(filter.id); updateFilter()"></app-remove-button>
+</div>
+
+<div *ngIf="value.filters.length > 1" class="clr-control-container clr-control-inline" style="float:left;">
+    <div class="clr-radio-wrapper">
+        <input type="radio" id="comparisonTypeAnd" name="comparisonType" [(ngModel)]="value.comparisonType" [value]="comparisonTypes.AND" class="clr-radio" (change)="updateFilter()">
+        <label for="comparisonTypeAnd" class="clr-control-label">{{comparisonTypes[comparisonTypes.AND]}}</label>
+    </div>
+    <div class="clr-radio-wrapper">
+        <input type="radio" id="comparisonTypeOr" name="comparisonType" [(ngModel)]="value.comparisonType" [value]="comparisonTypes.OR" class="clr-radio" (change)="updateFilter()">
+        <label for="comparisonTypeOr" class="clr-control-label">{{comparisonTypes[comparisonTypes.OR]}}</label>
+    </div>
+</div>
+
+<app-plus-button (click)="onAddButtonClick()"></app-plus-button>

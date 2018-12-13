@@ -1,4 +1,4 @@
-idea/
+.idea/
 .svn/
 node_modules/
 target/

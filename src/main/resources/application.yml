@@ -1,0 +1,36 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/webpoc
+        username: postgres
+        password: postgres
+    jpa:
+        hibernate:
+            ddl-auto: update #should be create for the first startup (until another way of initializing the db is implemented)
+        show-sql: true
+        properties:
+            hibernate:
+                temp:
+                    use_jdbc_metadata_defaults: false # to suppress postgres jdbc 'clob not implemented' error on metadata check
+
+# datasource for data to be shown by the framework
+data:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/dbint?currentSchema=inther_lc
+        username: inther_lc
+        password: aozhnl
+#        url: jdbc:postgresql://localhost:5432/dummy
+#        username: postgres
+#        password: postgres
+
+user:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/dbint?currentSchema=inther_lc
+        username: inther_lc
+        password: aozhnl
+---
+spring:
+    profiles: prod
+    jpa:
+        hibernate:
+            ddl-auto: none
+        show-sql: false

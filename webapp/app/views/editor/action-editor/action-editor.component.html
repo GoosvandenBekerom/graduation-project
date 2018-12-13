@@ -1,0 +1,189 @@
+<h2>Menu Actions</h2>
+
+<button type="button" class="btn btn-icon btn-primary" (click)="openCreateModal()">
+  <clr-icon shape="plus"></clr-icon>
+  Create
+</button>
+
+<clr-datagrid>
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>Type</clr-dg-column>
+  <clr-dg-column>Url</clr-dg-column>
+  <clr-dg-column>Overview</clr-dg-column>
+  <clr-dg-column>Path</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let action of actions" [clrDgItem]="action">
+
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(action)">Edit</button>
+      <button class="action-item" (click)="onManagePermissions(action)">Manage Permissions</button>
+      <button class="action-item" (click)="onDelete(action)">Delete</button>
+    </clr-dg-action-overflow>
+
+    <clr-dg-cell>{{ action.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ action.type }}</clr-dg-cell>
+    <clr-dg-cell>{{ action.url }}</clr-dg-cell>
+    <clr-dg-cell>{{ action.overviewId }}</clr-dg-cell>
+    <clr-dg-cell>{{ action.path }}</clr-dg-cell>
+
+  </clr-dg-row>
+
+</clr-datagrid>
+
+<!-- Create MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="createModalActive" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Create a new Menu Action</h3>
+  <div class="modal-body">
+
+    <form class="clr-form">
+      <section class="form-block">
+
+        <div class="form-group row">
+          <div class="clr-col-2">
+            <label for="type_create">Type</label>
+          </div>
+          <div class="clr-col-10 clr-control-container">
+            <div class="clr-select-wrapper">
+              <select class="clr-select" id="type_create" [(ngModel)]="actionCreate.type" name="type">
+                <option *ngFor="let type of types" [ngValue]="actionType[type]">{{ type }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ActionType External Url -->
+        <div class="form-group row" [hidden]="actionCreate.type != actionType.External_Url">
+          <div class="clr-col-2">
+            <label for="url_create">Url</label>
+          </div>
+          <div class="clr-col-10">
+            <input class="form-control" type="text" id="url_create" [(ngModel)]="actionCreate.url" name="url" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- ActionType Overview -->
+        <div class="form-group row" [hidden]="actionCreate.type != actionType.Overview">
+          <div class="clr-col-2">
+            <label for="overview_create">Overview</label>
+          </div>
+          <div class="clr-col-10 clr-control-container">
+            <div class="clr-select-wrapper">
+              <select class="clr-select" id="overview_create" [(ngModel)]="actionCreate.overviewId" name="overview">
+                <option *ngFor="let overview of overviews$ | async" [ngValue]="overview.id">{{ overview.id + '. ' + overview.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ActionType Path -->
+        <div class="form-group row" [hidden]="actionCreate.type != actionType.Path">
+          <div class="clr-col-2">
+            <label for="path_create">Path</label>
+          </div>
+          <div class="clr-col-10">
+            <input class="form-control" type="text" id="path_create" [(ngModel)]="actionCreate.path" name="path" autocomplete="off" />
+          </div>
+        </div>
+
+      </section>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeCreateModal()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmitCreateModal()">Create</button>
+  </div>
+</clr-modal>
+
+
+<!-- Update MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="updateModalActive" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Update Menu Action</h3>
+  <div class="modal-body">
+
+    <form class="clr-form">
+      <section class="form-block">
+
+        <div class="form-group row">
+          <div class="clr-col-2">
+            <label>Action ID</label>
+          </div>
+          <div class="clr-col-10 ">
+            <span>{{ actionUpdate?.id }}</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="clr-col-2">
+            <label for="type_update">Type</label>
+          </div>
+          <div class="clr-col-10 clr-control-container">
+            <div class="clr-select-wrapper">
+              <select class="clr-select" id="type_update" [(ngModel)]="actionUpdate.type" name="type">
+                <option *ngFor="let type of types" [ngValue]="actionType[type]">{{ type }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ActionType External Url -->
+        <div class="form-group row" [hidden]="actionUpdate.type != actionType.External_Url">
+          <div class="clr-col-2">
+            <label for="url_update">Url</label>
+          </div>
+          <div class="clr-col-10">
+            <input class="form-control" type="text" id="url_update" [(ngModel)]="actionUpdate.url" name="url" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- ActionType Overview -->
+        <div class="form-group row" [hidden]="actionUpdate.type != actionType.Overview">
+          <div class="clr-col-2">
+            <label for="overview_update">Overview</label>
+          </div>
+          <div class="clr-col-10 clr-control-container">
+            <div class="clr-select-wrapper">
+              <select class="clr-select" id="overview_update" [(ngModel)]="actionUpdate.overviewId" name="overview">
+                <option *ngFor="let overview of overviews$ | async" [ngValue]="overview.id">{{ overview.id + '. ' + overview.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ActionType Path -->
+        <div class="form-group row" [hidden]="actionUpdate.type != actionType.Path">
+          <div class="clr-col-2">
+            <label for="path_update">Path</label>
+          </div>
+          <div class="clr-col-10">
+            <input class="form-control" type="text" id="path_update" [(ngModel)]="actionUpdate.path" name="path" autocomplete="off" />
+          </div>
+        </div>
+
+      </section>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeUpdateModal()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmitUpdateModal()">Update</button>
+  </div>
+</clr-modal>
+
+<!-- Delete "Are you sure?" Modal -->
+<clr-modal [(clrModalOpen)]="deleteModalActive" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Are you sure?</h3>
+  <div class="modal-body">
+    You are about to delete action with id <strong>{{ actionDelete?.id }}</strong>.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeDeleteModal()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onYesDeleteModal()">Delete</button>
+  </div>
+</clr-modal>
+
+<app-manage-permissions-modal #modalManagePermissions
+                              [(entity)]="actionPermissionsModal"
+                              [entityType]="'Action'"
+                              [(open)]="managePermissionsModalActive"
+                              (submit)="onSubmitManagePermissions($event)"></app-manage-permissions-modal>

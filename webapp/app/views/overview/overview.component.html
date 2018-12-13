@@ -1,0 +1,102 @@
+<h1>
+    {{overview?.name}}
+
+    <clr-dropdown *ngIf="devGuard.canActivate(null, null)" style="float: right;">
+        <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+            <clr-icon shape="cog"></clr-icon>
+            Settings
+            <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+            <button type="button" (click)="managePermissionsModalActive = true" clrDropdownItem>
+                <clr-icon shape="group"></clr-icon>
+                Manage permissions
+            </button>
+            <button type="button" (click)="editColumnsModalActive = true" clrDropdownItem>
+                <clr-icon shape="view-columns"></clr-icon>
+                Edit columns
+            </button>
+        </clr-dropdown-menu>
+    </clr-dropdown>
+
+</h1>
+
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+
+    <clr-dg-column *ngFor="let column of overview?.columns"
+                   [hidden]="!column.visible"
+                   [clrDgField]="column.name || column.queryColumn"
+                   [clrDgSortOrder]="column.sortEnabled ? (column.sortAscending ? ascOrder : descOrder) : unsortedOrder">
+
+        {{column.name || column.queryColumn}}
+
+        <!-- Dropdown filter, based on column.dropdownFilterValues-->
+        <clr-dg-filter *ngIf="column.dropdownFilter" [clrDgFilter]="dropdownFilter">
+            <app-dropdown-filter #dropdownFilter [property]="column.name || column.queryColumn" [column]="column"></app-dropdown-filter>
+        </clr-dg-filter>
+
+        <!-- String (varchar/char) filter -->
+        <clr-dg-filter *ngIf="!column.dropdownFilter && (column.jdbcType == types.VARCHAR || column.jdbcType == types.CHAR)" [clrDgFilter]="varcharFilter">
+            <app-varchar-filter #varcharFilter [property]="column.name || column.queryColumn"></app-varchar-filter>
+        </clr-dg-filter>
+
+        <!-- Numeric filter -->
+        <clr-dg-filter
+                *ngIf="!column.dropdownFilter && (column.jdbcType == types.SMALLINT || column.jdbcType == types.INTEGER || column.jdbcType == types.BIGINT || column.jdbcType == types.NUMERIC)"
+                [clrDgFilter]="numFilter">
+            <app-numeric-filter #numFilter [property]="column.name || column.queryColumn"></app-numeric-filter>
+        </clr-dg-filter>
+
+        <!-- Boolean filter -->
+        <clr-dg-filter
+                *ngIf="!column.dropdownFilter && (column.jdbcType == types.BOOLEAN || column.jdbcType == types.BIT)"
+                [clrDgFilter]="boolFilter">
+            <app-boolean-filter #boolFilter [property]="column.name || column.queryColumn"></app-boolean-filter>
+        </clr-dg-filter>
+
+    </clr-dg-column>
+
+    <clr-dg-row *ngFor="let row of page?.content">
+
+        <clr-dg-cell *ngFor="let column of overview?.columns"
+                     [hidden]="!column.visible" class="text-truncate">
+
+            <span *ngIf="column.jdbcType != types.BOOLEAN && column.jdbcType != types.BIT">{{row[column.queryColumn]}}</span>
+            <input *ngIf="column.jdbcType == types.BOOLEAN || column.jdbcType == types.BIT" type="checkbox" [checked]="row[column.queryColumn]" disabled>
+        </clr-dg-cell>
+
+    </clr-dg-row>
+
+    <clr-dg-footer>
+
+        <div class="overview-refresh" *ngIf="overview">
+            <clr-icon shape="refresh"
+                    [ngClass]="overview?.refreshEnabled ? 'refresh-enabled' : 'refresh-disabled'"
+                    (click)="overview.refreshEnabled = !overview.refreshEnabled"
+            ></clr-icon>
+
+            <label>
+                Refresh rate
+                <input type="number" [(ngModel)]="overview.refreshRate" name="refreshRate" [disabled]="!overview?.refreshEnabled">
+            </label>
+        </div>
+
+        <clr-dg-pagination #pagination
+                           [(clrDgPage)]="pageNumber"
+                           [clrDgPageSize]="page?.size"
+                           [clrDgTotalItems]="page?.totalCount">
+
+            {{pagination?.firstItem + 1}} - {{pagination?.lastItem + 1}} of {{pagination?.totalItems}}
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
+
+<app-manage-permissions-modal [entityType]="'Overview'"
+                              [(entity)]="overview"
+                              [(open)]="managePermissionsModalActive"
+                              (submit)="onSubmitManagePermissions($event)">
+</app-manage-permissions-modal>
+
+<app-edit-columns-modal [(overview)]="overview"
+                        [(open)]="editColumnsModalActive">
+</app-edit-columns-modal>

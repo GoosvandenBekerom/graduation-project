@@ -1,0 +1,19 @@
+<clr-modal [(clrModalOpen)]="open" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Manage Permissions for <b>{{entityType}}</b> - {{entity?.name || entity?.id}}</h3>
+  <div class="modal-body">
+      <form>
+          <section class="form-block">
+              <div class="form-group">
+                  <label>User groups</label>
+                  <clr-checkbox *ngFor="let fg of formGroups" [(clrChecked)]="fg.checked">
+                      {{fg?.group?.logicalId}}
+                  </clr-checkbox>
+              </div>
+          </section>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="onClose()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </div>
+</clr-modal>

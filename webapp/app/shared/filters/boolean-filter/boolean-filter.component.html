@@ -1,0 +1,13 @@
+<div class="form-group">
+
+  <div class="checkbox">
+    <input type="checkbox" id="filterEnabled" [(ngModel)]="filterEnabled" (change)="updateFilter()">
+    <label for="filterEnabled">Enable filter</label>
+  </div>
+
+  <div class="checkbox">
+    <input type="checkbox" id="filterOn" [(ngModel)]="value.filters[0].value" name="value" (change)="updateFilter()">
+    <label for="filterOn">Filter value</label>
+  </div>
+
+</div>

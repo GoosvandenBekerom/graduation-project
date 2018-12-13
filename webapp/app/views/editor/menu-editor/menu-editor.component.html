@@ -1,0 +1,270 @@
+<h2>Menu Items</h2>
+
+<button type="button" class="btn btn-icon btn-primary" (click)="openCreateModal()">
+  <clr-icon shape="plus"></clr-icon>
+  Create
+</button>
+
+<clr-datagrid>
+
+  <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'text'">Text</clr-dg-column>
+  <clr-dg-column>Icon</clr-dg-column>
+  <clr-dg-column [clrDgField]="'depth'">Depth</clr-dg-column>
+  <clr-dg-column [clrDgField]="'leaf'">Is Leaf</clr-dg-column>
+  <clr-dg-column [clrDgField]="'parent.id'">Parent ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'parent.text'">Parent</clr-dg-column>
+  <clr-dg-column>Action ID</clr-dg-column>
+  <clr-dg-column>Action Type</clr-dg-column>
+  <clr-dg-column>Action Spec</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let item of menuItems" [clrDgItem]="item">
+
+    <clr-dg-action-overflow>
+        <button class="action-item" (click)="onEdit(item)">Edit</button>
+        <button class="action-item" (click)="onManagePermissions(item)">Manage Permissions</button>
+        <button class="action-item" (click)="onSetParent(item)">Set parent</button>
+        <button class="action-item" (click)="onDeleteParent(item)" [hidden]="!item.parent">Remove parent</button>
+        <button class="action-item" (click)="onSetAction(item)" [hidden]="!item.leaf">Set action</button>
+        <button class="action-item" (click)="onDeleteAction(item)" [hidden]="!item.action">Remove action</button>
+        <button class="action-item" (click)="onDelete(item)">Delete</button>
+    </clr-dg-action-overflow>
+
+    <clr-dg-cell>{{ item.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.text }}</clr-dg-cell>
+    <clr-dg-cell><clr-icon [attr.shape]="item.icon"></clr-icon></clr-dg-cell>
+    <clr-dg-cell>{{ item.depth }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.leaf }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.parent ? item.parent.id || '' : '' }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.parent ? item.parent.text || '' : '' }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.action ? item.action.id || '' : '' }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.action ? item.action.type || '' : '' }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.action ? item.action.url || item.action.path || item.action.overviewId || '' : '' }}</clr-dg-cell>
+
+  </clr-dg-row>
+
+</clr-datagrid>
+
+
+<!-- Create MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="createModalActive" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Create a new Menu Item</h3>
+  <div class="modal-body">
+
+    <form class="clr-form">
+      <section class="form-block">
+
+        <div class="form-group row">
+          <div class="clr-col-2">
+            <label for="icon_create">Icon</label>
+          </div>
+          <div class="clr-col-5 clr-control-container">
+            <div class="clr-select-wrapper">
+              <select class="clr-select" id="icon_create" [(ngModel)]="menuItemCreate.icon" name="icon">
+                <option *ngFor="let icon of icons" [ngValue]="icon">{{ icon }}</option>
+              </select>
+            </div>
+            <span class="clr-subtext text-muted">Ignored for items with depth of 2</span>
+          </div>
+          <div class="clr-col-5">
+            <span class="one-line-ellipsis">
+              <clr-icon [attr.shape]="menuItemCreate.icon" size="24"></clr-icon>
+                {{menuItemCreate.text || ''}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="clr-col-2">
+            <label for="text_create">Text</label>
+          </div>
+          <div class="clr-col-10">
+            <input class="form-control" type="text" id="text_create" [(ngModel)]="menuItemCreate.text" name="text" autocomplete="off" />
+          </div>
+        </div>
+
+      </section>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeCreateModal()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmitCreateModal()">Create</button>
+  </div>
+</clr-modal>
+
+
+<!-- Update MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="updateModalActive" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Update Menu Item</h3>
+    <div class="modal-body">
+
+        <form class="clr-form">
+            <section class="form-block">
+
+                <div class="form-group row">
+                    <div class="clr-col-2">
+                        <label for="icon_update">Icon</label>
+                    </div>
+                    <div class="clr-col-5 clr-control-container">
+                        <div class="clr-select-wrapper">
+                            <select class="clr-select" id="icon_update" [(ngModel)]="menuItemUpdate.icon" name="icon">
+                                <option *ngFor="let icon of icons" [ngValue]="icon">{{ icon }}</option>
+                            </select>
+                        </div>
+                        <span class="clr-subtext text-muted">Ignored for items with depth of 2</span>
+                    </div>
+                    <div class="clr-col-5">
+                        <span class="one-line-ellipsis">
+                            <clr-icon [attr.shape]="menuItemUpdate.icon" size="24"></clr-icon>
+                            {{menuItemUpdate.text || ''}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="clr-col-2">
+                        <label for="text_update">Text</label>
+                    </div>
+                    <div class="clr-col-10">
+                        <input class="form-control" type="text" id="text_update" [(ngModel)]="menuItemUpdate.text" name="text" autocomplete="off" />
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeUpdateModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitUpdateModal()">Update</button>
+    </div>
+</clr-modal>
+
+
+<!-- Set/Update Parent Form Modal -->
+<clr-modal [(clrModalOpen)]="parentModalActive" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Set Menu Item Parent</h3>
+    <div class="modal-body">
+
+        <form class="clr-form">
+            <section class="form-block">
+
+                <div class="form-group row">
+                    <div class="clr-col-2">
+                        <label>Item</label>
+                    </div>
+                    <div class="clr-col-10">
+                        <span class="text-info">{{ menuItemParent?.id + '. ' + menuItemParent?.text }}</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="clr-col-2">
+                        <label for="parent">Parent</label>
+                    </div>
+                    <div class="clr-col-10 clr-control-container">
+                        <div class="clr-select-wrapper">
+                            <select class="clr-select" id="parent" [(ngModel)]="menuItemParent?.parent.id" name="parent">
+                                <option *ngFor="let item of potentialParents" [ngValue]="item.id">{{ item.id + '. ' + item.text }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeParentModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitParentModal()">Save</button>
+    </div>
+</clr-modal>
+
+
+<!-- Set/Update Action Form Modal -->
+<clr-modal [(clrModalOpen)]="actionModalActive" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Set Menu Item Action</h3>
+    <div class="modal-body">
+
+        <form class="clr-form">
+            <section class="form-block">
+
+                <div class="form-group row">
+                    <div class="clr-col-2">
+                        <label>Item</label>
+                    </div>
+                    <div class="clr-col-10">
+                        <span class="text-info">{{ menuItemAction?.id + '. ' + menuItemAction?.text }}</span>
+                    </div>
+                </div>
+
+                <div class="form-group row" *ngIf="menuItemAction?.action">
+                    <div class="clr-col-2">
+                        <label for="action">Action</label>
+                    </div>
+                    <div class="clr-col-10 clr-control-container">
+                        <div class="clr-select-wrapper">
+                            <select class="clr-select" id="action" [(ngModel)]="menuItemAction.action" name="action">
+                                <option *ngFor="let action of actions" [ngValue]="action">
+                                    {{ action.id + '. ' + action.type + ' - ' + (action.url || action.path || action.overviewId || '') }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeActionModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitActionModal()">Save</button>
+    </div>
+</clr-modal>
+
+
+<!-- Delete "Are you sure?" Modal -->
+<clr-modal [(clrModalOpen)]="deleteModalActive" [clrModalSize]="'sm'">
+    <h3 class="modal-title">Are you sure?</h3>
+    <div class="modal-body">
+        You are about to delete <strong>{{ menuItemDelete?.text }}</strong>.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onCancelDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="onYesDeleteModal()">Delete</button>
+    </div>
+</clr-modal>
+
+
+<!-- Delete Parent "Are you sure?" Modal -->
+<clr-modal [(clrModalOpen)]="deleteParentModalActive" [clrModalSize]="'sm'">
+    <h3 class="modal-title">Are you sure?</h3>
+    <div class="modal-body">
+        You are about to clear <strong>{{ menuItemDelete?.text }}</strong>'s parent.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onCancelDeleteParentModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="onYesDeleteParentModal()">Delete</button>
+    </div>
+</clr-modal>
+
+
+<!-- Delete Action "Are you sure?" Modal -->
+<clr-modal [(clrModalOpen)]="deleteActionModalActive" [clrModalSize]="'sm'">
+    <h3 class="modal-title">Are you sure?</h3>
+    <div class="modal-body">
+        You are about to clear <strong>{{ menuItemDelete?.text }}</strong>'s action.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onCancelDeleteActionModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="onYesDeleteActionModal()">Delete</button>
+    </div>
+</clr-modal>
+
+<app-manage-permissions-modal [(entity)]="menuItemPermissionsModal"
+                              [entityType]="'MenuItem'"
+                              [(open)]="managePermissionsModalActive"
+                              (submit)="onSubmitManagePermissions($event)"></app-manage-permissions-modal>

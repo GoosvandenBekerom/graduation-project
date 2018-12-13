@@ -1,0 +1,35 @@
+.overview-refresh {
+    float: left;
+}
+
+.overview-refresh clr-icon {
+    cursor: pointer;
+}
+
+.overview-refresh clr-icon.refresh-enabled {
+    color: green;
+}
+
+.overview-refresh clr-icon.refresh-disabled {
+    color: red;
+}
+
+.overview-refresh label {
+    margin-left: 10px;
+}
+
+.overview-refresh input {
+    width: 30px;
+}
+
+clr-datagrid {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+clr-datagrid clr-dg-footer {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    right: 0;
+}

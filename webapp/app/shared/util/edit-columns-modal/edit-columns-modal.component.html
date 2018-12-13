@@ -1,0 +1,42 @@
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'xl'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Edit Columns of <strong>{{overview?.name}}</strong></h3>
+  <div class="modal-body">
+    <table class="table table-noborder">
+      <thead>
+      <tr>
+        <th class="left">Query Column</th>
+        <th>Name</th>
+        <th>Index</th>
+        <th>Visible</th>
+        <th>Dropdown Filter</th>
+        <th>Dropdown values</th>
+        <th>Permissions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let column of overview?.columns">
+        <td class="left"><strong>{{ column.queryColumn }}</strong></td>
+        <td><input type="text" [(ngModel)]="column.name" name="name" /></td>
+        <td><input type="number" [(ngModel)]="column.sequenceIndex" name="sequenceIndex" /></td>
+        <td><input type="checkbox" [(ngModel)]="column.visible" name="visible" /></td>
+        <td><input type="checkbox" [(ngModel)]="column.dropdownFilter" name="dropdown" /></td>
+        <td>
+          <div class="clr-control-container">
+            <textarea class="clr-textarea" [(ngModel)]="column.dropdownFilterValues" name="dropdown_values" [disabled]="!column.dropdownFilter"></textarea>
+          </div>
+        </td>
+        <td>
+          <app-column-permissions-dropdown [column]="column"
+                                           [groups]="userGroups$ | async"
+                                           (groupChange)="onChangeColumnPermissions(column, $event)">
+          </app-column-permissions-dropdown>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary-outline" (click)="onClose()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Done</button>
+  </div>
+</clr-modal>

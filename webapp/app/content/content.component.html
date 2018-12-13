@@ -1,0 +1,90 @@
+<div class="content-area">
+  <app-dev-console *ngIf="devGuard.canActivate(null, null)" class="fix-to-bottom"></app-dev-console>
+  <router-outlet></router-outlet>
+</div>
+
+<clr-vertical-nav [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="navCollapsed" *ngIf="loggedIn$ | async">
+  <ng-container *ngFor="let item of menuItems$ | async">
+
+    <!-- ActionType External_Url for depth 0 -->
+    <a clrVerticalNavLink externalUrl
+       *ngIf="item.leaf && item.depth == 0 && item.action && item.action.url"
+       [href]="item.action.url">
+
+      <clr-icon [attr.shape]="item.icon || defaultIcon" clrVerticalNavIcon></clr-icon>
+      {{item.text}}
+    </a>
+
+    <!-- ActionType Overview or Path for depth 0 -->
+    <a clrVerticalNavLink
+       *ngIf="item.leaf && item.depth == 0 && item.action && !item.action.url"
+       [routerLink]="item.action.path || (overviewPath + '/' + item?.action?.overviewId)"
+       routerLinkActive="active">
+
+      <clr-icon [attr.shape]="item.icon || defaultIcon" clrVerticalNavIcon></clr-icon>
+      {{item.text}}
+    </a>
+
+    <!-- Depth 0 with children -->
+    <clr-vertical-nav-group *ngIf="!item.leaf && item.depth == 0" routerLinkActive="active">
+
+      <clr-icon [attr.shape]="item.icon || defaultIcon" clrVerticalNavIcon></clr-icon>
+      {{item.text}}
+
+      <clr-vertical-nav-group-children>
+        <ng-container *ngFor="let child of item.children">
+
+          <!-- ActionType External_Url for depth 1 -->
+          <a clrVerticalNavLink externalUrl
+             *ngIf="child.leaf && child.action && child.action.url"
+             [href]="child.action.url">
+
+            {{child.text}}
+          </a>
+
+          <!-- ActionType Overview or Path for depth 1 -->
+          <a clrVerticalNavLink
+             *ngIf="child.leaf && child.action && !child.action.url"
+             [routerLink]="child.action.path || (overviewPath + '/' + child?.action?.overviewId)"
+             routerLinkActive="active">
+
+            {{child.text}}
+          </a>
+
+          <!-- Depth 1 with children -->
+          <clr-vertical-nav-group *ngIf="!child.leaf">
+
+            <clr-icon [attr.shape]="child.icon || 'error-standard'" clrVerticalNavIcon></clr-icon>
+            {{child.text}}
+
+            <clr-vertical-nav-group-children>
+
+              <ng-container *ngFor="let subChild of child.children">
+
+                <!-- ActionType External_Url for depth 2 -->
+                <a clrVerticalNavLink externalUrl
+                   *ngIf="subChild.action && subChild.action.url"
+                   [href]="subChild.action.url">
+
+                  {{subChild.text}}
+                </a>
+
+                <!-- ActionType Overview or Path for depth 2 -->
+                <a clrVerticalNavLink
+                   *ngIf="subChild.action && !subChild.action.url"
+                   [routerLink]="subChild.action.path || (overviewPath + '/' + subChild?.action?.overviewId)"
+                   routerLinkActive="active">
+
+                  {{subChild.text}}
+                </a>
+
+              </ng-container>
+
+            </clr-vertical-nav-group-children>
+          </clr-vertical-nav-group>
+        </ng-container>
+
+      </clr-vertical-nav-group-children>
+    </clr-vertical-nav-group>
+  </ng-container>
+</clr-vertical-nav>

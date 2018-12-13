@@ -1,0 +1,239 @@
+<h2>Overviews</h2>
+
+<button type="button" class="btn btn-icon btn-primary" (click)="openCreateModal()">
+  <clr-icon shape="plus"></clr-icon>
+  Create
+</button>
+
+<clr-datagrid [clrDgLoading]="overviewLoadingState">
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>Name</clr-dg-column>
+  <clr-dg-column>Query</clr-dg-column>
+  <clr-dg-column>Refresh</clr-dg-column>
+  <clr-dg-column>Refresh Rate</clr-dg-column>
+  <clr-dg-column>Page Size</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let overview of overviews" [clrDgItem]="overview">
+
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(overview)">Edit</button>
+      <button class="action-item" (click)="onEditColumns(overview)">Edit Columns</button>
+      <button class="action-item" (click)="onManagePermissions(overview)">Manage Permissions</button>
+      <button class="action-item" (click)="onDelete(overview)">Delete</button>
+    </clr-dg-action-overflow>
+
+    <clr-dg-cell>{{ overview.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ overview.name }}</clr-dg-cell>
+    <clr-dg-cell>
+      <clr-tooltip>
+        <code clrTooltipTrigger>{{ overview.query?.substring(0, 50) + (overview.query?.length > 50 ? '...' : '') }}</code>
+        <clr-tooltip-content [clrPosition]="'bottom-right'" [clrSize]="'lg'" *clrIfOpen>
+          <code>{{overview.query}}</code>
+        </clr-tooltip-content>
+      </clr-tooltip>
+    </clr-dg-cell>
+    <clr-dg-cell>{{ overview.refreshEnabled }}</clr-dg-cell>
+    <clr-dg-cell>{{ overview.refreshRate }}</clr-dg-cell>
+    <clr-dg-cell>{{ overview.pageSize }}</clr-dg-cell>
+
+  </clr-dg-row>
+
+</clr-datagrid>
+
+
+<!-- Create MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="createModalActive" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Create a new Overview</h3>
+  <div class="modal-body">
+
+    <form class="clr-form">
+      <section class="form-block">
+
+        <!-- Overview name -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label for="name_create">Name</label>
+          </div>
+          <div class="clr-col-9">
+            <input class="form-control" type="text" id="name_create" [(ngModel)]="overviewCreate.name" name="name" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Query -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label for="query_create">Query</label>
+          </div>
+          <div class="clr-col-9 clr-control-container">
+            <textarea class="clr-textarea" style="width: 100%" id="query_create" [(ngModel)]="overviewCreate.query" name="query"></textarea>
+          </div>
+        </div>
+
+        <!-- Total count column -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <a href="" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg tooltip-bottom-right">
+
+              <label for="create_total_column">Count column <clr-icon shape="info-circle"></clr-icon></label>
+
+              <span class="tooltip-content">
+                Set this to the column in the query/view that contains the total result count.<br>
+                Leave blank if there is no such column.
+              </span>
+            </a>
+          </div>
+          <div class="clr-col-9">
+            <input class="form-control" type="text" id="create_total_column" [(ngModel)]="overviewCreate.countColumn" name="total_column" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Refresh Enabled -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label>Refresh</label>
+          </div>
+          <div class="clr-col-9">
+            <clr-checkbox [(ngModel)]="overviewCreate.refreshEnabled" name="refresh">Enabled</clr-checkbox>
+          </div>
+        </div>
+
+        <!-- Overview Refresh Rate -->
+        <div class="form-group row" [hidden]="!overviewCreate.refreshEnabled">
+          <div class="clr-col-3">
+            <label for="refreshRate_create">Refresh Rate</label>
+          </div>
+          <div class="clr-col-3">
+            <input class="form-control" type="number" id="refreshRate_create" [(ngModel)]="overviewCreate.refreshRate" name="refreshRate" />
+          </div>
+        </div>
+
+        <!-- Overview Page Size -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label for="pageSize_create">Page Size</label>
+          </div>
+          <div class="clr-col-3">
+            <input class="form-control" type="number" id="pageSize_create" [(ngModel)]="overviewCreate.pageSize" name="pageSize" />
+          </div>
+        </div>
+
+      </section>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeCreateModal()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmitCreateModal()">Create</button>
+  </div>
+</clr-modal>
+
+
+<!-- Update MenuItem Form Modal -->
+<clr-modal [(clrModalOpen)]="updateModalActive" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Update Overview</h3>
+  <div class="modal-body">
+
+    <form class="clr-form">
+      <section class="form-block">
+
+        <!-- Overview name -->
+        <div class="form-group row">
+          <div class="clr-col-9">
+            <label for="name_update">Name</label>
+          </div>
+          <div class="clr-col-9">
+            <input class="form-control" type="text" id="name_update" [(ngModel)]="overviewUpdate.name" name="name" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Query -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label for="query_update">Query</label>
+          </div>
+          <div class="clr-col-9 clr-control-container">
+            <textarea class="clr-textarea" style="width: 100%" id="query_update" [(ngModel)]="overviewUpdate.query" name="query"></textarea>
+          </div>
+        </div>
+
+        <!-- Total count column -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <a href="" role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg tooltip-bottom-right">
+
+              <label for="update_total_column">Count column <clr-icon shape="info-circle"></clr-icon></label>
+
+              <span class="tooltip-content">
+                Set this to the column in the query/view that contains the total result count.<br>
+                Leave blank if there is no such column.
+              </span>
+            </a>
+          </div>
+          <div class="clr-col-9">
+            <input class="form-control" type="text" id="update_total_column" [(ngModel)]="overviewUpdate.countColumn" name="total_column" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Refresh Enabled -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label>Refresh</label>
+          </div>
+          <div class="clr-col-9">
+            <clr-checkbox [(ngModel)]="overviewUpdate.refreshEnabled" name="refresh">Enabled</clr-checkbox>
+          </div>
+        </div>
+
+        <!-- Overview Refresh Rate -->
+        <div class="form-group row" [hidden]="!overviewUpdate.refreshEnabled">
+          <div class="clr-col-3">
+            <label for="refreshRate_update">Refresh Rate</label>
+          </div>
+          <div class="clr-col-3">
+            <input class="form-control" type="number" id="refreshRate_update" [(ngModel)]="overviewUpdate.refreshRate" name="refreshRate" />
+          </div>
+        </div>
+
+        <!-- Overview Page Size -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label for="pageSize_update">Page Size</label>
+          </div>
+          <div class="clr-col-3">
+            <input class="form-control" type="number" id="pageSize_update" [(ngModel)]="overviewUpdate.pageSize" name="pageSize" />
+          </div>
+        </div>
+
+      </section>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeUpdateModal()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmitUpdateModal()">Update</button>
+  </div>
+</clr-modal>
+
+<!-- Delete "Are you sure?" Modal -->
+<clr-modal [(clrModalOpen)]="deleteModalActive" [clrModalSize]="'sm'" [clrModalStaticBackdrop]="true">
+  <h3 class="modal-title">Are you sure?</h3>
+  <div class="modal-body">
+    You are about to delete Overview <strong>{{ overviewDelete?.id + '. ' + overviewDelete?.name }}</strong>.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeDeleteModal()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="onYesDeleteModal()">Delete</button>
+  </div>
+</clr-modal>
+
+<app-edit-columns-modal
+        [(overview)]="overviewEditColumns"
+        [(open)]="editColumnsModalActive">
+</app-edit-columns-modal>
+
+<app-manage-permissions-modal #modalManagePermissions
+        [(entity)]="overviewManagePermissions"
+        [entityType]="'Overview'"
+        [(open)]="managePermissionsModalActive"
+        (submit)="onSubmitManagePermissions($event)">
+</app-manage-permissions-modal>

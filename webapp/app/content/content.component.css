@@ -1,0 +1,11 @@
+.fix-to-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.content-area {
+    margin-bottom: 1rem;
+}

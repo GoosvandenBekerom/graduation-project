@@ -1,0 +1,15 @@
+<clr-dropdown>
+  <button type="button" class="dropdown-toggle btn btn-link" clrDropdownTrigger>
+    Permissions
+    <clr-icon shape="caret down"></clr-icon>
+  </button>
+  <clr-dropdown-menu *clrIfOpen>
+    <div style="padding: 0 15px; text-align: left">
+      <div class="checkbox" *ngFor="let fg of formGroups">
+        <input type="checkbox" [(ngModel)]="fg.checked" [id]="fg?.group?.id" (change)="onCheckboxChange(fg)">
+        <label [for]="fg?.group?.id">{{fg?.group?.id}}</label>
+      </div>
+    </div>
+
+  </clr-dropdown-menu>
+</clr-dropdown>
