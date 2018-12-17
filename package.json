@@ -1,6 +1,6 @@
 {
-  "name": "client",
-  "version": "0.0.1",
+  "name": "inther-webpoc-client",
+  "version": "0.0.2",
   "license": "UNLICENSED",
   "scripts": {
     "ng": "ng",
@@ -10,9 +10,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json"
-  },
-  "publishConfig": {
-    "registry": "http://localhost:4873"
   },
   "dependencies": {
     "@angular/animations": "^6.1.0",
