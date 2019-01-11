@@ -14,11 +14,15 @@ export class BooleanFilterComponent implements OnInit, ClrDatagridFilterInterfac
   @Input() property: string;
   value = new FilterStructure();
 
+  @Input() autoRefresh: boolean;
+
   filterEnabled: boolean;
 
   changes = new Subject<any>();
 
   ngOnInit() {
+    this.filterEnabled = false;
+    this.value.filters = [];
     this.value.filters.push({id: 1, value: false, type: 'BOOLEAN'});
   }
 
@@ -27,6 +31,13 @@ export class BooleanFilterComponent implements OnInit, ClrDatagridFilterInterfac
   isActive(): boolean { return this.filterEnabled; }
 
   updateFilter(): void {
+    this.filterEnabled = true;
+    this.changes.next();
+  }
+
+  clear() {
+    this.filterEnabled = false;
+    this.value.filters[0].value = false;
     this.changes.next();
   }
 }

@@ -24,11 +24,14 @@ export class VarcharFilterComponent implements OnInit, ClrDatagridFilterInterfac
   @Input() property: string;
   value = new FilterStructure();
 
+  @Input() autoRefresh: boolean;
+
   counter = 0;
 
   changes = new Subject<any>();
 
   ngOnInit() {
+    this.value.filters = [];
     this.value.filters.push({id: this.counter++, type: this.types[0], value: ''});
   }
 
@@ -41,11 +44,16 @@ export class VarcharFilterComponent implements OnInit, ClrDatagridFilterInterfac
     if (index > -1) { this.value.filters.splice(index, 1); }
   }
 
-  accepts(item: string): boolean {return true;}
+  accepts(item: string): boolean { return true; }
 
   isActive(): boolean { return this.value.filters.filter(f => f.type.includes('NULL') || !!f.value).length > 0; }
 
   updateFilter() {
     this.changes.next();
+  }
+
+  clear() {
+    this.ngOnInit();
+    this.updateFilter();
   }
 }

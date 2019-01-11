@@ -7,20 +7,16 @@ import { FormsModule} from '@angular/forms';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { CoreModule } from './core/core.module';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { SharedModule } from './shared/shared.module';
-import { HomeComponent } from './views/home/home.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthInterceptor } from './core/interceptors/auth-interceptor';
 import { ContentComponent } from './content/content.component';
-import { NotFoundComponent } from './views/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
-    HomeComponent,
-    NotFoundComponent
   ],
   imports: [
     CoreModule,

@@ -25,7 +25,10 @@ import { SharedModule } from '../../shared/shared.module';
     OverviewEditorComponent
   ],
   exports: [
-    EditorComponent
+    EditorComponent,
+    ActionEditorComponent,
+    MenuEditorComponent,
+    OverviewEditorComponent
   ]
 })
 export class EditorModule { }

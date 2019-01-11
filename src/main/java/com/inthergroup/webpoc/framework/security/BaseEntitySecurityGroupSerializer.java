@@ -38,7 +38,8 @@ public class BaseEntitySecurityGroupSerializer extends StdSerializer<BaseEntity>
                 auth.getPrincipal().equals(Constants.AUTH_GOD_MODE)
                 || value.getSecurityGroups().stream()
                         .anyMatch(sg -> sg.getId()
-                                .equals(auth.getAuthorities().toArray(new GrantedAuthority[]{})[0].getAuthority()));
+                                .equals(auth.getAuthorities().toArray(new GrantedAuthority[]{})[0]
+                                        .getAuthority().replace("ROLE_", "")));
 
         if (isAllowed) {
             defaultSerializer.serialize(value, gen, provider);

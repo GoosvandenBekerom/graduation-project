@@ -31,6 +31,6 @@ public abstract @Data class BaseEntity implements Serializable {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<SecurityGroup> securityGroups;
 }

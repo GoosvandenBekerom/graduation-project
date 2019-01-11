@@ -132,7 +132,7 @@ export class OverviewComponent implements OnInit {
 
   onSubmitManagePermissions(userGroups: UserGroup[]) {
     this.service.updatePermissions(this.overview, userGroups).subscribe(updatedOverview => {
-      this.overview.securityGroups = updatedOverview.securityGroups;
+      this.overview = updatedOverview;
     });
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map, shareReplay, tap} from 'rxjs/operators';
 import {AUTHORIZATION_TOKEN_PREFIX, BASE_URL, HEADER_AUTHORIZATION, KEY_AUTH_TOKEN, KEY_AUTH_USER} from '../constants';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import * as jwt_decode_ from 'jwt-decode';
 
 const jwt_decode = jwt_decode_;
@@ -14,7 +14,7 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem(KEY_AUTH_TOKEN));
 
-  get isLoggedIn() {
+  get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
 
@@ -24,7 +24,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<string> {
     const body = new HttpParams({fromObject: {username, password}});
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
 

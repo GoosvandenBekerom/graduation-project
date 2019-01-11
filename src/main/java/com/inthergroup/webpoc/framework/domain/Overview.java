@@ -35,6 +35,8 @@ public @Data class Overview extends BaseEntity {
     private boolean refreshEnabled = false;
     private int refreshRate = 30;
 
+    private boolean autoRefreshFilters;
+
     /**
      * Set this to the query column name if the query/view has its own total count column
      * When this column is set the default count functionality should be ignored.

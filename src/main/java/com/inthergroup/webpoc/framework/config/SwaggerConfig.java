@@ -29,15 +29,11 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    // This is so the swagger functionality doesn't break when the framework package is moved somewhere else
-    private String packageName = this.getClass().getPackage().getName();
-    private String parentPackageName = packageName.substring(0, packageName.lastIndexOf('.'));
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(parentPackageName))
+                .apis(RequestHandlerSelectors.basePackage("com.inthergroup"))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Collections.singletonList(apiKey()))

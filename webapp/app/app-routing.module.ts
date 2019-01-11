@@ -1,9 +1,8 @@
 import {InjectionToken, NgModule} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterModule, Routes} from '@angular/router';
-import { PATH_ROUTE_OVERVIEW, PATH_ROUTE_EDITOR } from './core/constants';
-import { AuthGuard } from './core/guards/auth.guard';
-import { NotFoundComponent } from './views/not-found/not-found.component';
-import { HomeComponent } from './views/home/home.component';
+import { PATH_ROUTE_OVERVIEW, PATH_ROUTE_EDITOR } from './core';
+import { AuthGuard } from './core';
+import { NotFoundComponent } from './shared';
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 
@@ -12,8 +11,7 @@ const routes: Routes = [
     /* Home */
     {
         path: '',
-        component: HomeComponent,
-        canActivate: [AuthGuard],
+        loadChildren: './views/home/home.module#HomeModule'
     },
 
     /* Login */

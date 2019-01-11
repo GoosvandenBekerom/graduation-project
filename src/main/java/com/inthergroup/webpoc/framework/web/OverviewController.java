@@ -50,6 +50,7 @@ public class OverviewController extends BaseFrameworkController<Overview, Long, 
     public Overview update(@Valid @RequestBody Overview newObj, @PathVariable Long id) {
         Overview overview = findById(id);
         overview.setName(newObj.getName());
+        overview.setAutoRefreshFilters(newObj.isAutoRefreshFilters());
         overview.setRefreshEnabled(newObj.isRefreshEnabled());
         overview.setRefreshRate(newObj.getRefreshRate());
         overview.setPageSize(newObj.getPageSize());

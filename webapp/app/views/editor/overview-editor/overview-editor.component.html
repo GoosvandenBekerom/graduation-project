@@ -9,6 +9,7 @@
   <clr-dg-column>ID</clr-dg-column>
   <clr-dg-column>Name</clr-dg-column>
   <clr-dg-column>Query</clr-dg-column>
+  <clr-dg-column>Auto-refresh filters</clr-dg-column>
   <clr-dg-column>Refresh</clr-dg-column>
   <clr-dg-column>Refresh Rate</clr-dg-column>
   <clr-dg-column>Page Size</clr-dg-column>
@@ -32,6 +33,7 @@
         </clr-tooltip-content>
       </clr-tooltip>
     </clr-dg-cell>
+    <clr-dg-cell>{{ overview.autoRefreshFilters }}</clr-dg-cell>
     <clr-dg-cell>{{ overview.refreshEnabled }}</clr-dg-cell>
     <clr-dg-cell>{{ overview.refreshRate }}</clr-dg-cell>
     <clr-dg-cell>{{ overview.pageSize }}</clr-dg-cell>
@@ -84,6 +86,16 @@
           </div>
           <div class="clr-col-9">
             <input class="form-control" type="text" id="create_total_column" [(ngModel)]="overviewCreate.countColumn" name="total_column" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Auto Refresh Filters -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label>Auto-refresh filters</label>
+          </div>
+          <div class="clr-col-9">
+            <clr-checkbox [(ngModel)]="overviewCreate.autoRefreshFilters" name="auto-refresh">Enabled</clr-checkbox>
           </div>
         </div>
 
@@ -171,6 +183,16 @@
           </div>
           <div class="clr-col-9">
             <input class="form-control" type="text" id="update_total_column" [(ngModel)]="overviewUpdate.countColumn" name="total_column" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- Overview Auto Refresh Filters -->
+        <div class="form-group row">
+          <div class="clr-col-3">
+            <label>Auto-refresh filters</label>
+          </div>
+          <div class="clr-col-9">
+            <clr-checkbox [(ngModel)]="overviewUpdate.autoRefreshFilters" name="auto-refresh">Enabled</clr-checkbox>
           </div>
         </div>
 

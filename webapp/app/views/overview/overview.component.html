@@ -32,26 +32,39 @@
 
         <!-- Dropdown filter, based on column.dropdownFilterValues-->
         <clr-dg-filter *ngIf="column.dropdownFilter" [clrDgFilter]="dropdownFilter">
-            <app-dropdown-filter #dropdownFilter [property]="column.name || column.queryColumn" [column]="column"></app-dropdown-filter>
+            <app-dropdown-filter #dropdownFilter
+                                 [property]="column.name || column.queryColumn"
+                                 [column]="column"
+                                 [autoRefresh]="overview.autoRefreshFilters">
+            </app-dropdown-filter>
         </clr-dg-filter>
 
         <!-- String (varchar/char) filter -->
         <clr-dg-filter *ngIf="!column.dropdownFilter && (column.jdbcType == types.VARCHAR || column.jdbcType == types.CHAR)" [clrDgFilter]="varcharFilter">
-            <app-varchar-filter #varcharFilter [property]="column.name || column.queryColumn"></app-varchar-filter>
+            <app-varchar-filter #varcharFilter
+                                [property]="column.name || column.queryColumn"
+                                [autoRefresh]="overview.autoRefreshFilters">
+            </app-varchar-filter>
         </clr-dg-filter>
 
         <!-- Numeric filter -->
         <clr-dg-filter
                 *ngIf="!column.dropdownFilter && (column.jdbcType == types.SMALLINT || column.jdbcType == types.INTEGER || column.jdbcType == types.BIGINT || column.jdbcType == types.NUMERIC)"
                 [clrDgFilter]="numFilter">
-            <app-numeric-filter #numFilter [property]="column.name || column.queryColumn"></app-numeric-filter>
+            <app-numeric-filter #numFilter
+                                [property]="column.name || column.queryColumn"
+                                [autoRefresh]="overview.autoRefreshFilters">
+            </app-numeric-filter>
         </clr-dg-filter>
 
         <!-- Boolean filter -->
         <clr-dg-filter
                 *ngIf="!column.dropdownFilter && (column.jdbcType == types.BOOLEAN || column.jdbcType == types.BIT)"
                 [clrDgFilter]="boolFilter">
-            <app-boolean-filter #boolFilter [property]="column.name || column.queryColumn"></app-boolean-filter>
+            <app-boolean-filter #boolFilter
+                                [property]="column.name || column.queryColumn"
+                                [autoRefresh]="overview.autoRefreshFilters">
+            </app-boolean-filter>
         </clr-dg-filter>
 
     </clr-dg-column>

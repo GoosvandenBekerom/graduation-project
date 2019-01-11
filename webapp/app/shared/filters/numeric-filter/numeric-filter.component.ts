@@ -24,6 +24,8 @@ export class NumericFilterComponent implements OnInit, ClrDatagridFilterInterfac
   @Input() property: string;
   value = new FilterStructure();
 
+  @Input() autoRefresh: boolean;
+
   counter = 0;
 
   changes = new Subject<any>();
@@ -37,6 +39,12 @@ export class NumericFilterComponent implements OnInit, ClrDatagridFilterInterfac
 
   updateFilter() {
     this.changes.next();
+  }
+
+  clear() {
+    this.value.filters = [];
+    this.value.filters.push({id: this.counter++, type: this.types[0], value: ''});
+    this.updateFilter();
   }
 
   onAddButtonClick() {

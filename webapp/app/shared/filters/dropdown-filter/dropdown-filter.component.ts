@@ -17,6 +17,9 @@ export class DropdownFilterComponent implements OnInit, ClrDatagridFilterInterfa
 
   @Input() property: string;
   @Input() column: OverviewColumn;
+
+  @Input() autoRefresh: boolean;
+
   values: string[];
   type = 'DROPDOWN';
   value = new FilterStructure(ComparisonType.OR);
@@ -30,6 +33,7 @@ export class DropdownFilterComponent implements OnInit, ClrDatagridFilterInterfa
     this.service.getColumnFilterValues(this.column.id)
       .subscribe(values => {
         this.values = values;
+        this.value.filters = [];
         this.value.filters.push({id: this.counter++, type: 'DROPDOWN', value: this.values[0]});
       });
   }
@@ -37,8 +41,14 @@ export class DropdownFilterComponent implements OnInit, ClrDatagridFilterInterfa
   accepts(item: any): boolean { return true; }
   isActive(): boolean { return !!this.value && this.filterActive; }
 
-  updateFilter(): void {
+  updateFilter(activate = true): void {
+    this.filterActive = activate;
     this.changes.next(this.value);
+  }
+
+  clear() {
+    this.ngOnInit();
+    this.updateFilter(false);
   }
 
   onAddButtonClick() {

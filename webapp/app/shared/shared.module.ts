@@ -12,6 +12,7 @@ import { NumericFilterComponent } from './filters/numeric-filter/numeric-filter.
 import { VarcharFilterComponent } from './filters/varchar-filter/varchar-filter.component';
 import { EditColumnsModalComponent } from './util/edit-columns-modal/edit-columns-modal.component';
 import { RemoveButtonComponent } from './util/remove-button/remove-button.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { RemoveButtonComponent } from './util/remove-button/remove-button.compon
     EditColumnsModalComponent,
     ManagePermissionsModalComponent,
     PlusButtonComponent,
-    RemoveButtonComponent
+    RemoveButtonComponent,
+    NotFoundComponent
   ],
   exports: [
     DevConsoleComponent,

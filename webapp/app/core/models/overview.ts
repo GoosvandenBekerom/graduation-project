@@ -8,6 +8,7 @@ export class Overview extends Resource {
   refreshEnabled: boolean;
   refreshRate = 30;
   countColumn: string;
+  autoRefreshFilters: boolean;
   data: any[];
   columns: OverviewColumn[];
 }
